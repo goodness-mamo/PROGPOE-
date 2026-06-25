@@ -1,0 +1,7 @@
+C:\Users\goodn\source\repos\ConsoleApp3\PROGPARTPOE\PROGPARTPOE\bin\Debug\PROGPARTPOE.exe.config
+C:\Users\goodn\source\repos\ConsoleApp3\PROGPARTPOE\PROGPARTPOE\bin\Debug\PROGPARTPOE.exe
+C:\Users\goodn\source\repos\ConsoleApp3\PROGPARTPOE\PROGPARTPOE\bin\Debug\PROGPARTPOE.pdb
+C:\Users\goodn\source\repos\ConsoleApp3\PROGPARTPOE\PROGPARTPOE\obj\Debug\PROGPARTPOE.csproj.AssemblyReference.cache
+C:\Users\goodn\source\repos\ConsoleApp3\PROGPARTPOE\PROGPARTPOE\obj\Debug\PROGPARTPOE.csproj.CoreCompileInputs.cache
+C:\Users\goodn\source\repos\ConsoleApp3\PROGPARTPOE\PROGPARTPOE\obj\Debug\PROGPARTPOE.exe
+C:\Users\goodn\source\repos\ConsoleApp3\PROGPARTPOE\PROGPARTPOE\obj\Debug\PROGPARTPOE.pdb
