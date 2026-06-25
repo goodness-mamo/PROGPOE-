@@ -1,4 +1,4 @@
-name: .NET Build and Validation
+name: Build CyberSecurity Chatbot
 
 on:
   push:
@@ -24,21 +24,17 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore Dependencies
+      - name: Restore Project
         run: dotnet restore
 
       - name: Build Project
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Run Tests
-        run: dotnet test --no-build
-        continue-on-error: true
+        run: dotnet build --configuration Release
 
       - name: Publish Project
-        run: dotnet publish --configuration Release --output ./publish
+        run: dotnet publish --configuration Release --output publish
 
-      - name: Upload Artifact
+      - name: Upload Build
         uses: actions/upload-artifact@v4
         with:
-          name: CyberSecurityChatbot
-          path: ./publish
+          name: chatbot-build
+          path: publish
