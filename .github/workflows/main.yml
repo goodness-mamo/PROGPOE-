@@ -10,14 +10,13 @@ on:
       - main
 
 jobs:
-
   build:
 
     runs-on: windows-latest
 
     steps:
 
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup .NET
@@ -25,17 +24,20 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore Dependencies
-        run: dotnet restore *.csproj
+      - name: Show Files
+        run: dir
 
-      - name: Build Project
-        run: dotnet build *.csproj --configuration Release --no-restore
+      - name: Restore
+        run: dotnet restore
 
-      - name: Publish Project
-        run: dotnet publish *.csproj --configuration Release --output ./publish
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish --configuration Release --output publish
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: chatbot-build
-          path: ./publish
+          path: publish
