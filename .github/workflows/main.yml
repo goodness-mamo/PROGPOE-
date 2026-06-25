@@ -1,4 +1,4 @@
-name: .NET CI Build
+name: Build PROGPARTPOE
 
 on:
   push:
@@ -10,32 +10,27 @@ on:
       - main
 
 jobs:
-
   build:
 
     runs-on: windows-latest
 
     steps:
 
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
-      - name: Restore Dependencies
-        run: dotnet restore
+      - name: Restore NuGet Packages
+        run: nuget restore PROGPARTPOE.csproj
 
-      - name: Build Application
-        run: dotnet build --configuration Release
+      - name: Build Project
+        run: msbuild PROGPARTPOE.csproj /p:Configuration=Release
 
-      - name: Publish Application
-        run: dotnet publish --configuration Release --output ./publish
-
-      - name: Upload Build Artifact
+      - name: Upload Build
         uses: actions/upload-artifact@v4
         with:
-          name: CyberSecurityChatbot
-          path: ./publish
+          name: PROGPARTPOE-build
+          path: |
+            bin/Release

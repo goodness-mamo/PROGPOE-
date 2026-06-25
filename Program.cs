@@ -11,7 +11,7 @@ namespace CyberSecurityChatbot
         public string Title;
         public string Description;
         public string Reminder;
-        public bool Completed;
+        public bool Completed = false;
     }
 
     class QuizQuestion
