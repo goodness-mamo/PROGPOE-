@@ -1,50 +1,44 @@
 name: .NET Build and Validation
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
-pull_request:
-branches:
-- main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-build:
+  build:
 
-```
-runs-on: windows-latest
+    runs-on: windows-latest
 
-steps:
+    steps:
 
-- name: Checkout Repository
-  uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-- name: Setup .NET
-  uses: actions/setup-dotnet@v4
-  with:
-    dotnet-version: '8.0.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
 
-- name: Restore Dependencies
-  run: dotnet restore
+      - name: Restore Dependencies
+        run: dotnet restore
 
-- name: Build Project
-  run: dotnet build --configuration Release --no-restore
+      - name: Build Project
+        run: dotnet build --configuration Release --no-restore
 
-- name: Run Tests (Skip if none)
-  run: |
-    dotnet test --no-build --verbosity normal
-  continue-on-error: true
+      - name: Run Tests
+        run: dotnet test --no-build
+        continue-on-error: true
 
-- name: Publish Build Artifact
-  run: |
-    dotnet publish \
-    --configuration Release \
-    --output ./publish
+      - name: Publish Project
+        run: dotnet publish --configuration Release --output ./publish
 
-- name: Upload Artifact
-  uses: actions/upload-artifact@v4
-  with:
-    name: CyberSecurityChatbot-Build
-    path: ./publish
-```
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CyberSecurityChatbot
+          path: ./publish
