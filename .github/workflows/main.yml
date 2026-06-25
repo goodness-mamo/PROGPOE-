@@ -2,30 +2,25 @@ name: CyberSecurity Chatbot CI
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
-
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: 8.0.x
 
-      - name: Show Files
-        run: dir
+      - name: Find solution/project
+        run: dir -Recurse *.csproj
 
       - name: Restore
         run: dotnet restore
@@ -34,10 +29,10 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish --configuration Release --output publish
+        run: dotnet publish -c Release -o publish
 
-      - name: Upload Artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: chatbot-build
+          name: chatbot
           path: publish
