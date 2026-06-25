@@ -1,4 +1,4 @@
-name: Build CyberSecurity Chatbot
+name: Build PROGPARTPOE
 
 on:
   push:
@@ -10,32 +10,27 @@ on:
       - main
 
 jobs:
-
   build:
 
     runs-on: windows-latest
 
     steps:
 
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
-      - name: Restore Project
-        run: dotnet restore PROGPARTPOE.csproj
+      - name: Restore NuGet Packages
+        run: nuget restore PROGPARTPOE.csproj
 
       - name: Build Project
-        run: dotnet build PROGPARTPOE.csproj --configuration Release --no-restore
-
-      - name: Publish Project
-        run: dotnet publish PROGPARTPOE.csproj --configuration Release --output publish
+        run: msbuild PROGPARTPOE.csproj /p:Configuration=Release
 
       - name: Upload Build
         uses: actions/upload-artifact@v4
         with:
-          name: CyberSecurityChatbot
-          path: publish
+          name: PROGPARTPOE-build
+          path: |
+            bin/Release
